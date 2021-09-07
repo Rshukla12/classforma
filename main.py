@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File
 from OCR import parse_text
 import os
+import shutil
 
 app = FastAPI()
 
@@ -26,8 +27,16 @@ def parse_list():
 async def parse_image(file_name: str):
     try:
         res = await parse_text(file_name)
-    except:
-        res = "Parsing wasn't done, Please see the url"
+    except Exception as E:
+        res = f"Parsing wasn't done, a error occured :- {E}"
     return {
         "result": res
     }
+
+
+@app.post("/upload/")
+async def upload(image: UploadFile = File(...)):
+    path = f"./images/{image.filename}"
+    with open(path, "wb+") as file_object:
+        shutil.copyfileobj(image.file, file_object)
+    return {"to_parse": f"http://localhost:5000/parse/{image.filename}"}
