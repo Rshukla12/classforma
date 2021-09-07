@@ -12,7 +12,7 @@ async def parse_text(filename: str):
     :param filename: name of the file to extract the data
     :return: text extracted from the file
     """
-    text = pytesseract.image_to_string(Image.open(f'../images/{filename}'))
+    text = pytesseract.image_to_string(Image.open(f"app/images/{filename}"))
     return text
 
 
