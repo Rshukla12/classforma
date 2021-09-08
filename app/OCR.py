@@ -3,7 +3,7 @@ import pytesseract
 
 # To use Tesseract pytesseract needs the Tesseract executable
 # Change it to wherever the tesseract executable is install
-# for using without docker comment out below lines
+# for using without docker uncomment following lines
 # pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
 
 
